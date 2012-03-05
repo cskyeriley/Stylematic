@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta property="og:title" content="Stylematic: Shop Smarter!" />
+		<meta property="og:type" content="" />
+		<meta property="og:url" content="http://stylematic.kickofflabs.com/" />
+		<meta property="og:image" content="http://profile.ak.fbcdn.net/hprofile-ak-snc4/373687_202006569876600_339793075_n.jpg" />
+		<meta property="og:site_name" content="Stylematic" />
+		<title>Stylematic: Instant Outfits</title>
+		
+		<script src="jquery-1.6.4.min.js"></script>
+        <script src="jquery.mobile-1.0.min.js"></script>
+		<script src="jquery.mobile.scrollview.js"></script>
+		<script src="jqm.page.params.js"></script>
+		<script src="jstorage.js"></script>
+		
+		<script type="text/javascript" src="script.js"></script>
+		<link rel="stylesheet" href="jquery.mobile-1.0.min.css" />
+		<link rel="stylesheet" href="jquery.mobile.scrollview.css" />
+		<link rel="stylesheet" href="stylematic-theme.css" />
+		<link rel="stylesheet" href="styles.css" />
+		<script type="text/javascript">
+		var _kmq = _kmq || [];
+		  function _kms(u){
+			setTimeout(function(){
+			var s = document.createElement('script'); var f = document.getElementsByTagName('script')[0]; s.type = 'text/javascript'; s.async = true;
+			s.src = u; f.parentNode.insertBefore(s, f);
+			}, 1);
+		  }
+		  _kms('//i.kissmetrics.com/i.js');_kms('//doug1izaerwt3.cloudfront.net/857d69ae0964892896ef1af94d7491d10a357c9e.1.js');
+		</script>
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-28093762-1']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+		
+</head>
+	<body>	
+	<div data-role="page" id="recommendations" data-add-back-btn="true">
+		<div data-role="header">
+			<h1>Recommendations</h1>
+		</div>
+		<ul id="product">
+		<li class="large"></li>
+		<li class="small" id="orig"></li>
+		</ul>
+		<div data-role="controlgroup" data-type="horizontal" id="prod-actions">
+			<a href="#" id="refresh" data-role="button" data-icon="refresh">Similar</a>
+			<a href="#" id="wish" data-role="button" data-icon="plus">Wishlist</a>
+			<a href="#" id="buy" data-role="button" data-icon="arrow-r">Buy Now</a>
+			<a href="#" id="share" data-role="button" data-icon="plus">Share</a>
+		</div>
+		<div id="searchfilter" data-role="content" id="similar">
+			<h4>Similar Products</h4>
+			<div class="scrollThumbs" data-scroll="x">
+				<ul class="ui-scrollview-view" id="similar"></ul>
+			</div>
+		</div>
+		<!--<div id="searchfilter" data-role="content" id="personal">
+			<h4>Recommended for You</h4>
+			<ul></ul>
+		</div>-->
+		<div id="searchfilter" data-role="content" id="complementary">
+			<h4>Complete the Outfit</h4>
+			<div class="scrollThumbs" data-scroll="x">
+				<ul class="ui-scrollview-view" id="complementary"></ul>
+			</div>
+		</div>
+		<div data-role="footer" data-id="footnav" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="index.html#feed">Browse</a></li>
+					<li><a href="index.html#index">Search</a></li>
+					<li><a href="snap.html">Snap</a></li>
+					<li><a href="wishlist.html">Wishlist</a></li>
+					<li><a href="profile.html">Profile</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</body>
+	</html>

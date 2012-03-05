@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta property="og:title" content="Stylematic: Shop Smarter!" />
+		<meta property="og:type" content="" />
+		<meta property="og:url" content="http://stylematic.kickofflabs.com/" />
+		<meta property="og:image" content="http://profile.ak.fbcdn.net/hprofile-ak-snc4/373687_202006569876600_339793075_n.jpg" />
+		<meta property="og:site_name" content="Stylematic" />
+		<title>Stylematic: Instant Outfits</title>
+		
+		<script src="jquery-1.6.4.min.js"></script>
+        <script src="jquery.mobile-1.0.min.js"></script>
+		<script src="jquery.mobile.scrollview.js"></script>
+		<script src="jqm.page.params.js"></script>
+		<script src="jstorage.js"></script>
+		
+		<script type="text/javascript" src="script.js"></script>
+		<link rel="stylesheet" href="jquery.mobile-1.0.min.css" />
+		<link rel="stylesheet" href="jquery.mobile.scrollview.css" />
+		<link rel="stylesheet" href="stylematic-theme.css" />
+		<link rel="stylesheet" href="styles.css" />
+		<script type="text/javascript">
+		var _kmq = _kmq || [];
+		  function _kms(u){
+			setTimeout(function(){
+			var s = document.createElement('script'); var f = document.getElementsByTagName('script')[0]; s.type = 'text/javascript'; s.async = true;
+			s.src = u; f.parentNode.insertBefore(s, f);
+			}, 1);
+		  }
+		  _kms('//i.kissmetrics.com/i.js');_kms('//doug1izaerwt3.cloudfront.net/857d69ae0964892896ef1af94d7491d10a357c9e.1.js');
+		</script>
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-28093762-1']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+		
+</head>
+	<body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=149150131773744";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	<div class="search" data-role="page" id="profile" data-add-back-btn="true">
+		<div data-role="header">
+			<h1>My Style</h1>
+		</div>
+		<div data-role="content">
+			<p>Thanks for using Stylematic! We're just a prototype right now, but we want to send you personalized style recommendations if you fill out this short survey:</p>
+			<form id="emailform" method="POST">
+				<div data-role="content" id="labels">
+					<h4>I'm interested in seeing:</h4>
+					<div class="scrollThumbs" data-scroll="x">
+						<ul class="ui-scrollview-view" id="labels-list">
+							<li value="Women's Clothes"><img src="images/profile/womens.jpg"/><div class="label-bg"></div><span class="name">Womens' Clothes</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="Plus Sizes"><img src="images/profile/plus-sizes.jpg"/><div class="label-bg"></div><span class="name">Plus Sizes</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="Petites"><img src="images/profile/petites.jpg"/><div class="label-bg"></div><span class="name">Petites</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="Maternity Clothes"><img src="images/profile/maternity.jpg"/><div class="label-bg"></div><span class="name">Maternity Clothes</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="Bridal"><img src="images/profile/bridal.jpg"/><div class="label-bg"></div><span class="name">Bridal</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+						</ul>
+					</div>
+				</div>
+				<div data-role="content" id="body">
+					<h4>My body type is:</h4>
+					<div class="scrollThumbs" data-scroll="x">
+						<ul class="ui-scrollview-view" id="body-list">
+							<li label="banana"><img src="images/profile/banana.png"/><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li label="apple"><img src="images/profile/apple.png"/><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li label="pear"><img src="images/profile/pear.png"/><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li label="hourglass"><img src="images/profile/hourglass.png"/><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+						</ul>
+					</div>
+				</div>
+				<div data-role="content" id="colors">
+					<h4>My favorite colors are:</h4>
+					<div class="scrollThumbs" data-scroll="x">
+						<ul class="ui-scrollview-view" id="colors-list">
+							<li value="red"><img src="images/profile/colors/red.jpg"/><div class="label-bg"></div><span class="name">Red</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="orange"><img src="images/profile/colors/orange.jpg"/><div class="label-bg"></div><span class="name">Orange</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="yellow"><img src="images/profile/colors/yellow.jpg"/><div class="label-bg"></div><span class="name">Yellow</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="white"><img src="images/profile/colors/white.jpg"/><div class="label-bg"></div><span class="name">White</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="black"><img src="images/profile/colors/black.jpg"/><div class="label-bg"></div><span class="name">Black</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="green"><img src="images/profile/colors/green.jpg"/><div class="label-bg"></div><span class="name">Green</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="blue"><img src="images/profile/colors/blue.jpg"/><div class="label-bg"></div><span class="name">Blue</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="purple"><img src="images/profile/colors/purple.jpg"/><div class="label-bg"></div><span class="name">Purple</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="pink"><img src="images/profile/colors/pink.jpg"/><div class="label-bg"></div><span class="name">Pink</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="beige"><img src="images/profile/colors/beige.jpg"/><div class="label-bg"></div><span class="name">Beige</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="brown"><img src="images/profile/colors/brown.jpg"/><div class="label-bg"></div><span class="name">Brown</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li value="grey"><img src="images/profile/colors/grey.jpg"/><div class="label-bg"></div><span class="name">Grey</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+						</ul>
+					</div>
+				</div>
+				<div data-role="content" id="pref-shoes">
+					<h4>What kinds of shoes do you like?</h4>
+					<div class="scrollThumbs" data-scroll="x">
+						<ul class="ui-scrollview-view" id="pref-shoes-list">
+							<li><img src="images/profile/shoes/ankle-boot.jpg"/><div class="label-bg"></div><span class="name">Ankle boots</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li><img src="images/profile/shoes/clog.jpg"/><div class="label-bg"></div><span class="name">Clogs and mules</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li><img src="images/profile/shoes/flat-boot.jpg"/><div class="label-bg"></div><span class="name">Boots</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li><img src="images/profile/shoes/flats.jpg"/><div class="label-bg"></div><span class="name">Flats</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li><img src="images/profile/shoes/loafers.jpg"/><div class="label-bg"></div><span class="name">Loafers</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li><img src="images/profile/shoes/moccasin.jpg"/><div class="label-bg"></div><span class="name">Moccasins</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li><img src="images/profile/shoes/platforms.jpg"/><div class="label-bg"></div><span class="name">Platform pumps</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li><img src="images/profile/shoes/pumps.jpg"/><div class="label-bg"></div><span class="name">Pumps</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li><img src="images/profile/shoes/sandal.jpg"/><div class="label-bg"></div><span class="name">Sandals</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li><img src="images/profile/shoes/wedges.jpg"/><div class="label-bg"></div><span class="name">Wedge heels</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+							<li><img src="images/profile/shoes/wedge-sandal.jpg"/><div class="label-bg"></div><span class="name">Wedge sandals</span><div class="checkbox check-bg"></div><div class="checkbox check"></div></li>
+						</ul>
+					</div>
+				</div>
+				<!--
+				<div data-role="content" id="pref-pants">
+					<h4>What kinds of pants do you like?</h4>
+					<div class="scrollThumbs" data-scroll="x">
+						<ul class="ui-scrollview-view" id="pref-pants-list"></ul>
+					</div>
+				</div>
+				<div data-role="content" id="pref-acc">
+					<h4>What kinds of accessories do you like?</h4>
+					<div class="scrollThumbs" data-scroll="x">
+						<ul class="ui-scrollview-view" id="pref-acc-list"></ul>
+					</div>
+				</div>
+				-->
+				<label for="stores">What are your favorite stores?</label>
+				<input type="text" name="stores" id="stores" value=""  />
+				<label for="outfit">Describe your favorite outfit:</label>
+				<input type="text" name="outfit" id="outfit" value=""  />
+				
+				<fieldset data-role="controlgroup" id="interests">
+					<legend>One last question! Check all that apply:</legend>
+					<input type="checkbox" name="discover" id="discover" class="custom" />
+					<label for="discover">I would like to discover new products that match my style while I shop.</label>
+					<input type="checkbox" name="coupons" id="coupons" class="custom" />
+					<label for="coupons">I would like to recieve store coupons for products I like.</label>
+					<input type="checkbox" name="livestyle" id="livestyle" class="custom" />
+					<label for="livestyle">I would pay a small amount for live style or outfit advice from an expert when I'm shopping.</label>
+				</fieldset>
+				<label for="name">Your name:</label>
+				<input type="text" name="name" id="name" value=""  />
+				<label for="email">Your email address:</label>
+				<input type="text" name="email" id="email" value=""  />
+				<button type="submit" data-theme="b" name="submit">Submit</button>
+			</form>
+		</div>
+		<div data-role="footer" data-id="footnav" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="index.html#feed">Browse</a></li>
+					<li><a href="index.html#index">Search</a></li>
+					<li><a href="snap.html">Snap</a></li>
+					<li><a href="wishlist.html">Wishlist</a></li>
+					<li><a href="profile.html">Profile</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

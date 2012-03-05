@@ -1,0 +1,136 @@
+<html><head>
+<script src="jquery-1.4.4.min.js"></script>
+<style>
+	html, body{height: 100%; width:100%; margin: 0; padding: 0;}
+	body{}
+	ul{
+		list-style: none;
+		margin: 30px;
+		padding: 0;
+		overflow: auto;
+	}
+	#allItems{padding-bottom: 310px;}
+	li{
+		width: 250px;
+		height: 250px;
+		border: 5px solid #888;
+		float: left;
+		margin-right: 20px;
+		margin-bottom: 20px;
+		overflow: hidden;
+		position: relative;
+		text-align: center;
+		display: table;
+		background: #fff;
+	}
+	li:hover, li.on{
+		border: 5px solid #0088cc;
+	}
+	li img{margin: 10px auto 0;display: table-cell;vertical-align: middle;}
+	li div{text-align: left;background: #bbb; position: absolute; bottom: 0px; height: 40px; width: 100%; z-index:1; opacity: 0.8}
+	span{color: #333; font-family: "Droid Sans", "Lucida Grande", Helvetical, Arial, sans-serif; opacity: 1; font-weight:bold; text-align: left;position:absolute; display:inline-block; z-index: 9999; width: 230px; white-space:nowrap; overflow:hidden; text-overflow: ellipsis;}
+	span.color{font-size: 10px; bottom: 5px; text-align:right; color: #666;}
+	span.name{font-size: 14px; bottom: 20px; left: 10px; color: #333;}
+	li:hover div{opacity: 0.6}
+	#preview{display:none; position:fixed; bottom:0px; width: 100%; height: 256px; background: #f5f5f5; z-index:999999; white-space: nowrap; overflow: auto; margin:0; padding: 30px;}
+	#preview li{float:left; display:inline; display: inline-block;float: none;overflow: auto;}
+</style>
+<script>
+var retailer = 54, apiKey = "uid1376-3637124-1", prods = [], last_id="";
+$.ajaxSetup({dataType: 'jsonp'});
+var outfits = [["9e0ac194e7673bebdcf52c93715cc958", "ab7c858e6a0afa0f42dc25e6a1df1c4b", "ab7c858e6a0afa0f42dc25e6a1e17b97", "ab7c858e6a0afa0f42dc25e6a1e33d2b", "ab7c858e6a0afa0f42dc25e6a1e42d24", "ab7c858e6a0afa0f42dc25e6a1e43ef3", "ab7c858e6a0afa0f42dc25e6a1e96d54", "ab7c858e6a0afa0f42dc25e6a1e9808b"],
+["9e0ac194e7673bebdcf52c93715a3e1a", "9e0ac194e7673bebdcf52c93715c7c7f", "9e0ac194e7673bebdcf52c93716aa35d", "ab7c858e6a0afa0f42dc25e6a1d55301", "ab7c858e6a0afa0f42dc25e6a1d865a8", "ab7c858e6a0afa0f42dc25e6a1dae7f3", "ab7c858e6a0afa0f42dc25e6a1ded07b", "ab7c858e6a0afa0f42dc25e6a1e29517", "ab7c858e6a0afa0f42dc25e6a1e413fd", "ab7c858e6a0afa0f42dc25e6a1e6e41f", "ab7c858e6a0afa0f42dc25e6a1ee0ded", "ab7c858e6a0afa0f42dc25e6a1f12920"],
+["287d73f28503a20e7be9aeceaffd8b67", "ab7c858e6a0afa0f42dc25e6a1d7e638", "ab7c858e6a0afa0f42dc25e6a1da29c4", "ab7c858e6a0afa0f42dc25e6a1dee83d", "ab7c858e6a0afa0f42dc25e6a1e35b42", "ab7c858e6a0afa0f42dc25e6a1e3661d", "ab7c858e6a0afa0f42dc25e6a1e9c83f", "ab7c858e6a0afa0f42dc25e6a1e9e124", "ab7c858e6a0afa0f42dc25e6a1eaab19", "ab7c858e6a0afa0f42dc25e6a1f160db"],
+["287d73f28503a20e7be9aeceaffee9e2", "9e0ac194e7673bebdcf52c9371645ff6", "ab7c858e6a0afa0f42dc25e6a1dbdbe1", "ab7c858e6a0afa0f42dc25e6a1dcff84", "ab7c858e6a0afa0f42dc25e6a1dfedfc", "ab7c858e6a0afa0f42dc25e6a1e42c05", "ab7c858e6a0afa0f42dc25e6a1ef8f4b", "ab7c858e6a0afa0f42dc25e6a1f0c738"],
+["ab7c858e6a0afa0f42dc25e6a1dd112a", "ab7c858e6a0afa0f42dc25e6a1e145d5", "ab7c858e6a0afa0f42dc25e6a1e15dd0", "ab7c858e6a0afa0f42dc25e6a1e61271", "ab7c858e6a0afa0f42dc25e6a1ec3e99", "ab7c858e6a0afa0f42dc25e6a1ec4417"],
+["ab7c858e6a0afa0f42dc25e6a1dd6cb8", "ab7c858e6a0afa0f42dc25e6a1df1047", "ab7c858e6a0afa0f42dc25e6a1dfc596", "ab7c858e6a0afa0f42dc25e6a1efa2cd", "ab7c858e6a0afa0f42dc25e6a1f03898"],
+["ab7c858e6a0afa0f42dc25e6a1da37b7", "ab7c858e6a0afa0f42dc25e6a1db9d9f", "ab7c858e6a0afa0f42dc25e6a1de0ca6", "ab7c858e6a0afa0f42dc25e6a1dfd920", "ab7c858e6a0afa0f42dc25e6a1ec8efa", "ab7c858e6a0afa0f42dc25e6a1f0dc2b", "ab7c858e6a0afa0f42dc25e6a1f0f77b", "ab7c858e6a0afa0f42dc25e6a1f2816f"],
+["9e0ac194e7673bebdcf52c937151dd6e", "9e0ac194e7673bebdcf52c93716908fb", "9e0ac194e7673bebdcf52c93716a90c0", "ab7c858e6a0afa0f42dc25e6a1d8d9e6", "ab7c858e6a0afa0f42dc25e6a1e34d1d", "ab7c858e6a0afa0f42dc25e6a1ea0ba5"],
+["287d73f28503a20e7be9aeceaffc6012", "9e0ac194e7673bebdcf52c937167cec5", "9e0ac194e7673bebdcf52c93716a9ac4", "9e0ac194e7673bebdcf52c93716ac89a", "ab7c858e6a0afa0f42dc25e6a1eef060"],
+["287d73f28503a20e7be9aeceaffeec55", "9e0ac194e7673bebdcf52c9371651f5c", "ab7c858e6a0afa0f42dc25e6a1d968cd", "ab7c858e6a0afa0f42dc25e6a1def547", "ab7c858e6a0afa0f42dc25e6a1edef1f"],
+["ab7c858e6a0afa0f42dc25e6a1dd6cb8", "ab7c858e6a0afa0f42dc25e6a1df1047", "ab7c858e6a0afa0f42dc25e6a1dfc596", "ab7c858e6a0afa0f42dc25e6a1e24be5", "ab7c858e6a0afa0f42dc25e6a1ead48b", "ab7c858e6a0afa0f42dc25e6a1ef8f4b", "ab7c858e6a0afa0f42dc25e6a1f03898"],
+["ab7c858e6a0afa0f42dc25e6a1d6897f", "ab7c858e6a0afa0f42dc25e6a1e16113", "ab7c858e6a0afa0f42dc25e6a1e3a2b8", "ab7c858e6a0afa0f42dc25e6a1e42e1c", "ab7c858e6a0afa0f42dc25e6a1e61271"],
+["287d73f28503a20e7be9aeceaffa4d8a", "58d76ee9528fcea0c53a2c6bcd4a0f0f", "58d76ee9528fcea0c53a2c6bcdac15ec", "58d76ee9528fcea0c53a2c6bcdaf8514", "58d76ee9528fcea0c53a2c6bcdafee99", "58d76ee9528fcea0c53a2c6bcdb04e2b"],
+["57f72ad49c9a02fc1ca36e8d1ce30757", "58d76ee9528fcea0c53a2c6bcda79ef5", "58d76ee9528fcea0c53a2c6bcdaa32f5", "58d76ee9528fcea0c53a2c6bcdaa614b", "58d76ee9528fcea0c53a2c6bcdac9ec2", "9e0ac194e7673bebdcf52c93715b1eb4", "9e0ac194e7673bebdcf52c9371647b31", "ab7c858e6a0afa0f42dc25e6a1dfc596"],
+["58d76ee9528fcea0c53a2c6bcda3f151", "58d76ee9528fcea0c53a2c6bcda4c153", "58d76ee9528fcea0c53a2c6bcdaa6b57", "58d76ee9528fcea0c53a2c6bcdaac106", "58d76ee9528fcea0c53a2c6bcdae33b8", "58d76ee9528fcea0c53a2c6bcdb23222", "9e0ac194e7673bebdcf52c93715e602f", "ab7c858e6a0afa0f42dc25e6a1d99f0a", "ab7c858e6a0afa0f42dc25e6a1f2f055", "be50e2cff73a20f011ac55d1b2b326b4"]];
+$(function(){
+var textsearch = {
+	"fields" : ["description", "name", "colorName^3", "categoryNames^5"],
+	"use_dis_max" : true
+}
+
+function search(query){
+	textsearch.query = query
+	var url = "http://ec2-107-22-42-149.compute-1.amazonaws.com:9200/stylematic/stylematic/_search"
+	$.getJSON(url+'?pretty=true&size=200&callback=?', JSON.stringify(textsearch), 
+	function(resp){
+		console.log(resp)
+		if(resp.hits.hits.length){
+			renderProds(resp.hits.hits);
+		}
+	});
+}
+
+function renderProds(prods){
+	console.log(prods)
+	for(i in prods){
+		p = prods[i]._source
+		$("<li id=\""+p.uid+"\"><img src='"+p.taggedImage+"'><div></div><span class='name'>"+p.name+"</span><span class='color'>"+p.retailer+", "+price(p.price)+"</span></li>").data("product", p).appendTo("#allItems")
+	};
+}
+function price(n){
+	return "$" + n.toFixed(2)
+}
+/*$("input").keypress(function(){
+	value = $(this).attr("value");
+	$("#allItems li").hide()
+	for(i in prods){
+		if(prods[i].name.toLowerCase().match(value)) $("#allItems #"+prods[i].uid).show()
+	}
+});*/
+$("input[name=search]").click(function(){search($("input[name=query]").val())})
+});
+metaCategories = {
+	"Accessories": ["belts", "gloves", "hair-accessories", "hats", "hosiery", "leggings", "scarves", "socks", "sunglasses", "womens-accessories"], 
+	"Bags": ["handbags", "hobo-bags", "satchels", "shoulder-bags", "tote-bags", "clutches"],
+	"Tops": ["button-front-tops", "camisole-tops", "cashmere-tops", "halter-tops", "longsleeve-tops", "shortsleeve-tops", "sleeveless-tops", "tank-tops", "tees-and-tshirts", "tunic-tops", "womens-tops"],
+    "Sweaters": ["cardigan-sweaters", "cashmere-sweaters", "crewneck-sweaters", "turleneck-sweaters", "v-neck-sweaters", "vests"], 
+	"Pants": ["bootcut-jeans","casual-pants","cropped-jeans","cropped-pants","dress-pants","flare-jeans","jeans","pants-shorts","shorts","skinny-jeans","skinny-pants","wide-leg-pants"],
+	"Dresses": ["black-dresses","cocktail-dresses","day-dresses","dresses","evening-dresses"],
+	"Skirts": ["long-skirts","mid-length-skirts","mini-skirts","skirts"],
+	"Jewelry": ["bracelets", "diamond-jewelry", "earrings", "jewelry", "necklaces", "rings"], 
+	"Outerwear": ["blazers", "casual-jackets", "coats", "fur-and-shearling-coats", "jackets", "leather-and-suede-coats", "puffer-coats", "raincoats-and-trenchcoats", "womens-outerwear", "wool-coats"], 
+	"Shoes": ["boots", "flats", "mules-and-clogs", "platforms", "pumps", "sandals", "wedges", "womens-shoes"]
+}
+
+function catHTML(){
+	var strings = {"Accessories":"", "Tops": "", "Pants":"", "Dresses": "", "Skirts":"", "Jewelry":"", "Outerwear":"", "Shoes":"", "Sweaters":"", "Bags":""}
+	for(o in outfits){
+		for(p in outfits[o]){
+			pob = $("#"+outfits[o][p]).data("product");
+			if(pob){
+				meta = getMeta(pob.categories);
+				strings[meta] += "<li><a href=\"#o"+o+"\" pid=\""+$("#"+outfits[o][p]).attr("id")+"\">"+$("#"+outfits[o][p]).html()+"</a></li>"
+			}
+		}
+	}
+	for(s in strings){
+		console.log("<div data-role=\"page\" id=\""+s+"\"><div data-role=\"header\"><a href=\"#index\" data-icon=\"home\" data-iconpos=\"notext\">Home</a><h1>"+s+"</h1></div><ul>"+strings[s]+"</ul></div>")
+	}
+}
+function getMeta(catArr){
+	for(c in catArr){
+		for(m in metaCategories){
+			if(metaCategories[m].indexOf(catArr[c]) != -1)
+				return m;
+		}
+	}
+}
+</script>
+
+</head><body>
+<div id="search"><label>Type here to search:</label><input type="text" name="query"/><input type="submit" id="search" name="search" value="Search"/></div>
+<div id="paste" style="display:none;"><h3>Copy and paste this somewhere:</h3><p></p></div>
+<ul id="allItems"></ul>
+<ul id="preview"></ul>
+</body>

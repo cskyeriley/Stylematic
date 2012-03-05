@@ -1,0 +1,104 @@
+<html><head>
+<script src="jquery-1.4.4.min.js"></script>
+<style>
+	html, body{height: 100%; width:100%; margin: 0; padding: 0;}
+	body{}
+	ul{
+		list-style: none;
+		margin: 30px;
+		padding: 0;
+		overflow: auto;
+	}
+	#allItems{padding-bottom: 310px;}
+	li{
+		width: 250px;
+		height: 250px;
+		border: 5px solid #888;
+		float: left;
+		margin-right: 20px;
+		margin-bottom: 20px;
+		overflow: hidden;
+		position: relative;
+		text-align: center;
+		display: table;
+		background: #fff;
+	}
+	li:hover, li.on{
+		border: 5px solid #0088cc;
+	}
+	li img{margin: 0 auto;display: table-cell;vertical-align: middle;}
+	li div{text-align: left;background: #bbb; position: absolute; bottom: 0px; height: 40px; width: 100%; z-index:1; opacity: 0.7}
+	span{color: #333; font-family: Lucida, Helvetical, Arial, sans-serif; opacity: 1; font-weight:bold; text-align: left;position:absolute; display:inline-block; z-index: 9999; width: 230px; white-space:nowrap; overflow:hidden; text-overflow: ellipsis;}
+	span.color{font-size: 10px; bottom: 5px; text-align:right; color: #666;}
+	span.name{font-size: 14px; bottom: 20px; left: 10px; color: #333;}
+	li:hover div{opacity: 0.4}
+	#preview{display:none; position:fixed; bottom:0px; width: 100%; height: 256px; background: #f5f5f5; z-index:999999; white-space: nowrap; overflow: auto; margin:0; padding: 30px;}
+	#preview li{float:left; display:inline; display: inline-block;float: none;overflow: auto;}
+</style>
+<script>
+var retailer = 54, apiKey = "uid1376-3637124-1", prods = [], last_id="";
+$.ajaxSetup({dataType: 'jsonp'});
+$(function(){
+function fetchProds(){
+	var params = (last_id)? "&startkey=%22"+last_id+"%22&skip=1": ""
+	$.get('http://stylematic.cloudant.com/br/_design/prods/_view/all?limit=250'+params, 
+	function(resp){
+		if(resp.rows.length){
+			renderProds(resp);
+			
+			last_id=resp.rows.pop().key
+			fetchProds();
+		}
+	});
+}
+
+function renderProds(resp){
+	for(p in resp.rows){
+		product = resp.rows[p].value
+		prods.push(product)
+		$("#allItems").append("<li id=\""+product.uid+"\"><img src='"+product.image+"'><div></div><span class='name'>"+product.name+"</span><span class='color'>"+product.color+"</span></li>")
+	};
+}
+
+fetchProds();
+$("#allItems li").live("click", function(){
+	$(this).toggleClass('on')
+	if($(this).is(".on")){
+		$("#preview").show();
+		$("#preview").append("<li class='"+$(this).attr("id")+"'>"+$(this).html()+"</li>")
+	} else {
+		$("#preview li."+$(this).attr("id")).remove()
+		if($("#preview").is(":empty")) $("#preview").hide()
+	}
+});
+$("input").keypress(function(){
+	value = $(this).attr("value");
+	$("#allItems li").hide()
+	for(i in prods){
+		if(prods[i].name.toLowerCase().match(value)) $("#allItems #"+prods[i].uid).show()
+	}
+});
+$("#save").click(function(){
+	items = [], paste="["
+	$("li.on").each(function(){
+		items.push($(this).attr("id"))
+	})
+	var paste = "[\"" + items.toString().replace(/,/g, "\", \"") + "\"]"
+	$("#paste p").html(paste)
+	$("#paste").show()
+})
+$("#clear").click(function(){
+	$("#paste p").html("")
+	$("#paste").hide()
+	$("li.on").removeClass("on")
+	$("#preview").empty().hide()
+});
+});
+</script>
+
+</head><body>
+<div id="search"><label>Type here to search:</label><input type="text" name="query"/><input type="submit" id="save" value="Save this outfit"/><input type="submit" value="Clear Outfit" id="clear"/></div>
+<div id="paste" style="display:none;"><h3>Copy and paste this somewhere:</h3><p></p></div>
+<ul id="allItems"></ul>
+<ul id="preview"></ul>
+</body>
